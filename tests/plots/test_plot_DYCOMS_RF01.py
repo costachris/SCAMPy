@@ -1,6 +1,15 @@
-import sys
-sys.path.insert(0, "./")
-sys.path.insert(0, "../")
+import sys, os
+PS = os.sep
+code_path = os.path.dirname(os.path.realpath(__file__))
+while not code_path.endswith('SCAMPy'):
+    code_path = os.path.dirname(code_path)
+    if not 'SCAMPy' in code_path: break
+code_path = code_path+PS
+test_path = code_path+PS+'tests'+PS
+plot_path = code_path+PS+'tests'+PS+'plots'+PS
+sys.path.insert(0, code_path)
+sys.path.insert(0, test_path)
+sys.path.insert(0, plot_path)
 
 import os
 import subprocess
@@ -105,6 +114,6 @@ def test_DYCOMS_RF01_radiation(sim_data):
     plots[2].set_xlim([1, 10])
     plots[3].set_xlim([-0.1, 0.5])
 
-    plt.savefig("plots/output/DYCOMS_RF01_radiation.pdf")
+    plt.savefig(plot_path+"DYCOMS_RF01_radiation.pdf")
     plt.clf()
 

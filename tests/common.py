@@ -1,4 +1,16 @@
-import os
+import sys, os
+PS = os.sep
+code_path = os.path.dirname(os.path.realpath(__file__))
+while not code_path.endswith('SCAMPy'):
+    code_path = os.path.dirname(code_path)
+    if not 'SCAMPy' in code_path: break
+code_path = code_path+PS
+test_path = code_path+PS+'tests'+PS
+plot_path = code_path+PS+'tests'+PS+'plots'+PS
+sys.path.insert(0, code_path)
+sys.path.insert(0, test_path)
+sys.path.insert(0, plot_path)
+
 import subprocess
 import json
 import warnings
@@ -16,12 +28,15 @@ def simulation_setup(case):
     warnings.filterwarnings("ignore", message="numpy.dtype size changed")
     warnings.filterwarnings("ignore", message="numpy.ufunc size changed")
 
+
     # simulation related parameters
-    os.system("python ../generate_namelist.py " + case)
-    file_case = open(case + '.in').read()
+    os.system("python "+code_path+"generate_namelist.py " + case)
+    file_case = open(test_path+case + '.in').read()
     # turbulence related parameters
-    os.system("python ../generate_paramlist.py " +  case)
-    file_params = open('paramlist_' + case + '.in').read()
+    os.system("python "+code_path+"generate_paramlist.py " +  case)
+    file_params = open(test_path+'paramlist_' + case + '.in').read()
+
+    os.system("python "+code_path+"setup.py build_ext --inplace")
 
     namelist  = json.loads(file_case)
     paramlist = json.loads(file_params)

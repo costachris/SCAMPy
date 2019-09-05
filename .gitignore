@@ -4,6 +4,8 @@
 *.so
 *.o
 *.c
+*.pdf
+.pytest_cache/*
 *.idea
 *.in
 *.idea/workspace.xml

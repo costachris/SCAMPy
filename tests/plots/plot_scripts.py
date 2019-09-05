@@ -1,6 +1,15 @@
-import sys
-sys.path.insert(0, "./")
-sys.path.insert(0, "../")
+import sys, os
+PS = os.sep
+code_path = os.path.dirname(os.path.realpath(__file__))
+while not code_path.endswith('SCAMPy'):
+    code_path = os.path.dirname(code_path)
+    if not 'SCAMPy' in code_path: break
+code_path = code_path+PS
+test_path = code_path+PS+'tests'+PS
+plot_path = code_path+PS+'tests'+PS+'plots'+PS
+sys.path.insert(0, code_path)
+sys.path.insert(0, test_path)
+sys.path.insert(0, plot_path)
 
 import numpy as np
 
@@ -24,7 +33,7 @@ def discrete_cmap(N, base_cmap=None):
     return base.from_list(cmap_name, color_list, N)
 
 
-def plot_mean(data, title, folder="plots/output/"):
+def plot_mean(data, title, folder=plot_path):
     """
     Plots mean profiles from Scampy
 
@@ -67,7 +76,7 @@ def plot_mean(data, title, folder="plots/output/"):
     plt.clf()
 
 
-def plot_drafts(data, title, folder="plots/output/"):
+def plot_drafts(data, title, folder=plot_path):
     """
     Plots updraft and environment profiles from Scampy
 
@@ -120,7 +129,7 @@ def plot_drafts(data, title, folder="plots/output/"):
     plt.clf()
 
 
-def plot_var_covar_mean(data, title, folder="plots/output/"):
+def plot_var_covar_mean(data, title, folder=plot_path):
     """
     Plots variance and covariance profiles from Scampy
 
@@ -161,7 +170,7 @@ def plot_var_covar_mean(data, title, folder="plots/output/"):
     plt.clf()
 
 
-def plot_var_covar_components(data, title, folder="plots/output/"):
+def plot_var_covar_components(data, title, folder=plot_path):
     """
     Plots variance and covariance components profiles from Scampy
 
@@ -206,7 +215,7 @@ def plot_var_covar_components(data, title, folder="plots/output/"):
     plt.clf()
 
 
-def plot_timeseries_1D(data, title, folder="plots/output/"):
+def plot_timeseries_1D(data, title, folder=plot_path):
     """
     Plots timeseries from Scampy
 
@@ -246,7 +255,7 @@ def plot_timeseries_1D(data, title, folder="plots/output/"):
     plt.clf()
 
 
-def plot_timeseries(data, case, folder="plots/output/"):
+def plot_timeseries(data, case, folder=plot_path):
     """
     Plots the time series of Scampy simulations
 
