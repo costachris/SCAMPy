@@ -46,8 +46,8 @@ def main():
     namelist_defaults['turbulence']['EDMF_PrognosticTKE']['calc_scalar_var'] = True
     namelist_defaults['turbulence']['EDMF_PrognosticTKE']['mixing_length'] = 'sbtd_eq'
 
-    namelist_defaults['turbulence']['EDMF_PrognosticTKE']['pressure_closure_buoy'] = 'normalmode'
-    namelist_defaults['turbulence']['EDMF_PrognosticTKE']['pressure_closure_drag'] = 'normalmode'
+    namelist_defaults['turbulence']['EDMF_PrognosticTKE']['pressure_closure_buoy'] = 'tan18'
+    namelist_defaults['turbulence']['EDMF_PrognosticTKE']['pressure_closure_drag'] = 'tan18'
     namelist_defaults['turbulence']['EDMF_PrognosticTKE']['pressure_closure_asp_label'] = 'const'
 
     namelist_defaults['output'] = {}
@@ -140,8 +140,8 @@ def Rico(namelist_defaults):
     namelist['time_stepping']['dt'] = 20.0
     namelist['time_stepping']['t_max'] = 86400.0
 
-    namelist['microphysics']['rain_model'] = 'cutoff'
-    # namelist['microphysics']['rain_model'] = 'clima_1m'
+    #namelist['microphysics']['rain_model'] = 'cutoff'
+    namelist['microphysics']['rain_model'] = 'clima_1m'
 
     namelist['meta']['simname'] = 'Rico'
     namelist['meta']['casename'] = 'Rico'
@@ -158,8 +158,8 @@ def TRMM_LBA(namelist_defaults):
     namelist['time_stepping']['dt'] = 30.0
     namelist['time_stepping']['t_max'] = 21600.0
 
-    namelist['microphysics']['rain_model'] = 'cutoff'
-    # namelist['microphysics']['rain_model'] = 'clima_1m'
+    #namelist['microphysics']['rain_model'] = 'cutoff'
+    namelist['microphysics']['rain_model'] = 'clima_1m'
 
     namelist['meta']['simname'] = 'TRMM_LBA'
     namelist['meta']['casename'] = 'TRMM_LBA'

@@ -48,7 +48,7 @@ def main():
     paramlist_defaults['turbulence']['EDMF_PrognosticTKE']['entrainment_factor'] = 0.03
     paramlist_defaults['turbulence']['EDMF_PrognosticTKE']['sorting_factor'] = 4.0
     paramlist_defaults['turbulence']['EDMF_PrognosticTKE']['turbulent_entrainment_factor'] = 0.05
-    paramlist_defaults['turbulence']['EDMF_PrognosticTKE']['sorting_power'] = 2.5
+    paramlist_defaults['turbulence']['EDMF_PrognosticTKE']['sorting_power'] = 2.0
     paramlist_defaults['turbulence']['EDMF_PrognosticTKE']['aspect_ratio'] = 0.25
     # This constant_plume_spacing corresponds to plume_spacing/alpha_d in the Tan et al paper,
     #with values plume_spacing=500.0, alpha_d = 0.375
@@ -59,8 +59,8 @@ def main():
 
     paramlist_defaults['turbulence']['EDMF_PrognosticTKE']['pressure_normalmode_buoy_coeff1'] = 1.0/3.0
     paramlist_defaults['turbulence']['EDMF_PrognosticTKE']['pressure_normalmode_buoy_coeff2'] = 0.0
-    paramlist_defaults['turbulence']['EDMF_PrognosticTKE']['pressure_normalmode_adv_coeff'] = 0.2
-    paramlist_defaults['turbulence']['EDMF_PrognosticTKE']['pressure_normalmode_drag_coeff'] = 0.75
+    paramlist_defaults['turbulence']['EDMF_PrognosticTKE']['pressure_normalmode_adv_coeff'] = 0.75
+    paramlist_defaults['turbulence']['EDMF_PrognosticTKE']['pressure_normalmode_drag_coeff'] = 1.0
 
     if case_name == 'Soares':
         paramlist = Soares(paramlist_defaults)
