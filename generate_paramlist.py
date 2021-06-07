@@ -91,11 +91,22 @@ def main():
         paramlist = SP(paramlist_defaults)
     elif case_name == 'DryBubble':
         paramlist = DryBubble(paramlist_defaults)
+    elif case_name == 'StochasticBomex':  # Haakon: Stochastic closure
+        paramlist = StochasticBomex(paramlist_defaults)
     else:
         print('Not a valid case name')
         exit()
 
     write_file(paramlist)
+
+
+def StochasticBomex(paramlist_defaults):
+    # Haakon: Stochastic closure
+    paramlist = Bomex(paramlist_defaults)
+    paramlist["meta"]["casename"] = "StochasticBomex"
+    paramlist["turbulence"]["EDMF_PrognosticTKE"]["stochastic_noise"] = 1.0
+    return paramlist
+
 
 def Soares(paramlist_defaults):
 

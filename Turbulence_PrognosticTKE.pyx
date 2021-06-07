@@ -167,6 +167,10 @@ cdef class EDMF_PrognosticTKE(ParameterizationBase):
         self.pressure_buoy_coeff = paramlist['turbulence']['EDMF_PrognosticTKE']['pressure_buoy_coeff']
         self.aspect_ratio = paramlist['turbulence']['EDMF_PrognosticTKE']['aspect_ratio']
 
+        ## Haakon: Stochastic closure
+        self.stochastic_noise = paramlist['turbulence']['EDMF_PrognosticTKE']['stochastic_noise']
+        ##
+
         if str(namelist['turbulence']['EDMF_PrognosticTKE']['pressure_closure_buoy']) == 'normalmode':
             try:
                 self.pressure_normalmode_buoy_coeff1 = paramlist['turbulence']['EDMF_PrognosticTKE']['pressure_normalmode_buoy_coeff1']
@@ -1301,6 +1305,9 @@ cdef class EDMF_PrognosticTKE(ParameterizationBase):
         return
 
     cpdef compute_entrainment_detrainment(self, GridMeanVariables GMV, CasesBase Case):
+        # Compute entrainment and detrainment parameters.
+        #
+        # Here, you can inject a stochastic closure.
         cdef:
             Py_ssize_t k
             entr_struct ret
@@ -1381,6 +1388,10 @@ cdef class EDMF_PrognosticTKE(ParameterizationBase):
                     ret = self.entr_detr_fp(input)
                     self.entr_sc[i,k] = ret.entr_sc
                     self.detr_sc[i,k] = ret.detr_sc
+                    ## Haakon (stochastic closure)
+                    self.entr_sc[i,k] *= np.random.lognormal(1.0, self.stochastic_noise)
+                    self.detr_sc[i,k] *= np.random.lognormal(1.0, self.stochastic_noise)
+                    ## End: Haakon
                     self.sorting_function[i,k] = ret.sorting_function
                     self.b_mix[i,k] = ret.b_mix
 

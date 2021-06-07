@@ -41,6 +41,18 @@ cdef class Bomex(CasesBase):
     cpdef update_surface(self, GridMeanVariables GMV, TimeStepping TS)
     cpdef update_forcing(self, GridMeanVariables GMV,  TimeStepping TS)
 
+## Haakon: Stochastic closure
+cdef class StochasticBomex(Bomex):
+    cpdef initialize_reference(self, Grid Gr, ReferenceState Ref, NetCDFIO_Stats Stats) 
+    cpdef initialize_profiles(self, Grid Gr, GridMeanVariables GMV, ReferenceState Ref )
+    cpdef initialize_surface(self, Grid Gr,  ReferenceState Ref )
+    cpdef initialize_forcing(self, Grid Gr,  ReferenceState Ref, GridMeanVariables GMV )
+    cpdef initialize_io(self, NetCDFIO_Stats Stats)
+    cpdef io(self, NetCDFIO_Stats Stats)
+    cpdef update_surface(self, GridMeanVariables GMV, TimeStepping TS)
+    cpdef update_forcing(self, GridMeanVariables GMV,  TimeStepping TS)
+##
+
 cdef class life_cycle_Tan2018(CasesBase):
     cdef:
         double shf0

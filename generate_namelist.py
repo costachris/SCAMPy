@@ -63,6 +63,8 @@ def main():
 
     if case_name == 'Bomex':
         namelist = Bomex(namelist_defaults)
+    elif case_name == 'StochasticBomex':
+        namelist = StochasticBomex(namelist_defaults)
     elif case_name == 'Nieuwstadt':
         namelist = Nieuwstadt(namelist_defaults)
     elif case_name == 'life_cycle_Tan2018':
@@ -136,6 +138,16 @@ def Bomex(namelist_defaults):
     namelist['meta']['casename'] = 'Bomex'
 
     return namelist
+
+
+def StochasticBomex(namelist_defaults):
+    # Haakon: stochastic closure
+    namelist = Bomex(namelist_defaults)
+    namelist['meta']['simname'] = 'StochasticBomex'
+    namelist['meta']['casename'] = 'StochasticBomex'
+
+    return namelist
+
 
 def life_cycle_Tan2018(namelist_defaults):
 

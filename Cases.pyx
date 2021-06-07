@@ -38,6 +38,8 @@ def CasesFactory(namelist, paramlist):
         return SP(paramlist)
     elif namelist['meta']['casename'] == 'DryBubble':
         return DryBubble(paramlist)
+    elif namelist['meta']['casename'] == 'StochasticBomex':  # stochastic case
+        return StochasticBomex(paramlist)
 
     else:
         print('case not recognized')
@@ -389,6 +391,35 @@ cdef class Bomex(CasesBase):
     cpdef update_forcing(self, GridMeanVariables GMV, TimeStepping TS):
         self.Fo.update(GMV)
         return
+
+cdef class StochasticBomex(Bomex):
+    def __init__(self, paramlist):
+        super(StochasticBomex, self).__init__(paramlist)
+        self.casename = "StochasticBomex"
+    
+    cpdef initialize_reference(self, Grid Gr, ReferenceState Ref, NetCDFIO_Stats Stats):
+        super(StochasticBomex, self).initialize_reference(Gr, Ref, Stats)
+    
+    cpdef initialize_profiles(self, Grid Gr, GridMeanVariables GMV, ReferenceState Ref):
+        super(StochasticBomex, self).initialize_profiles(Gr, GMV, Ref)
+
+    cpdef initialize_surface(self, Grid Gr, ReferenceState Ref):
+        super(StochasticBomex, self).initialize_surface(Gr, Ref)
+    
+    cpdef initialize_forcing(self, Grid Gr, ReferenceState Ref, GridMeanVariables GMV):
+        super(StochasticBomex, self).initialize_forcing(Gr, Ref, GMV)
+    
+    cpdef initialize_io(self, NetCDFIO_Stats Stats):
+        super(StochasticBomex, self).initialize_io(Stats)
+    
+    cpdef io(self, NetCDFIO_Stats Stats):
+        super(StochasticBomex, self).io(Stats)
+    
+    cpdef update_surface(self, GridMeanVariables GMV, TimeStepping TS):
+        super(StochasticBomex, self).update_surface(GMV, TS)
+    
+    cpdef update_forcing(self, GridMeanVariables GMV, TimeStepping TS):
+        super(StochasticBomex, self).update_forcing(GMV, TS)
 
 cdef class life_cycle_Tan2018(CasesBase):
     # Taken from: "An extended eddy- diffusivity mass-flux scheme for unified representation of subgrid-scale turbulence and convection"
