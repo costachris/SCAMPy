@@ -21,6 +21,11 @@ def main():
     namelist_defaults['grid']['dims'] = 1
     namelist_defaults['grid']['gw'] = 2
 
+    # Rad namelist
+    namelist_defaults['radiation'] = {}
+    namelist_defaults['radiation']['toa_sw']
+    ####
+    
     namelist_defaults['thermodynamics'] = {}
     namelist_defaults['thermodynamics']['thermal_variable'] = 'thetal'
     namelist_defaults['thermodynamics']['sgs'] = 'quadrature'

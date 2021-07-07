@@ -12,7 +12,7 @@ import string
 # include_path = [mpi4py.get_include()]
 
 include_path = [np.get_include()]
-# include_path += ['./Csrc']
+include_path += ['./RRTMG']
 
 if sys.platform == 'darwin':
     #Compile flags for MacOSX
@@ -43,7 +43,11 @@ elif 'eu' in platform.node():
     f_compiler = 'gfortran'
 elif 'sampo' in platform.node():
     #Compile flags for sampo @ Caltech
-    library_dirs = os.environ['LD_LIBRARY_PATH'].split(':')
+    #library_dirs = os.environ['LD_LIBRARY_PATH'].split(':')
+    try:
+       library_dirs = os.environ['LD_LIBRARY_PATH'].split(':')
+    except:
+       library_dirs = ''
     libraries = []
     libraries.append('mpi')
     libraries.append('gfortran')
@@ -205,16 +209,16 @@ _ext = Extension('pytest_wrapper', ['pytest_wrapper.pyx'], include_dirs=include_
 extensions.append(_ext)
 
 #Build RRTMG
-#
-# rrtmg_compiled = os.path.exists('./RRTMG/rrtmg_build/rrtmg_combined.o')
-# if not rrtmg_compiled:
-#     run_str = 'cd ./RRTMG; '
-#     run_str += ('FC='+ f_compiler + ' LIB_NETCDF=' + netcdf_lib + ' INC_NETCDF='+
-#                netcdf_include + ' csh ./compile_RRTMG_combined.csh')
-#     print run_str
-#     sp.call([run_str], shell=True)
-# else:
-#     print("RRTMG Seems to be already compiled.")
+
+rrtmg_compiled = os.path.exists('./RRTMG/rrtmg_build/rrtmg_combined.o')
+if not rrtmg_compiled:
+    run_str = 'cd ./RRTMG; '
+    run_str += ('FC='+ f_compiler + ' LIB_NETCDF=' + netcdf_lib + ' INC_NETCDF='+
+               netcdf_include + ' csh ./compile_RRTMG_combined.csh')
+    print(run_str)
+    sp.call([run_str], shell=True)
+else:
+    print("RRTMG Seems to be already compiled.")
 #
 
 setup(

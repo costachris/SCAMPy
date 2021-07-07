@@ -163,7 +163,7 @@ cdef class Soares(CasesBase):
         return
 
     cpdef initialize_radiation(self, Grid Gr, ReferenceState Ref, GridMeanVariables GMV, TimeStepping TS):
-        self.Rad.initialize(Gr, GMV, TS)
+        self.Rad.initialize(Ref, Gr, GMV, TS)
         return
 
     cpdef initialize_io(self, NetCDFIO_Stats Stats):
@@ -264,7 +264,7 @@ cdef class Nieuwstadt(CasesBase):
         return
 
     cpdef initialize_radiation(self, Grid Gr, ReferenceState Ref, GridMeanVariables GMV, TimeStepping TS):
-        self.Rad.initialize(Gr, GMV, TS)
+        self.Rad.initialize(Ref, Gr, GMV, TS)
         return
 
     cpdef initialize_io(self, NetCDFIO_Stats Stats):
@@ -405,7 +405,7 @@ cdef class Bomex(CasesBase):
         return
 
     cpdef initialize_radiation(self, Grid Gr, ReferenceState Ref, GridMeanVariables GMV, TimeStepping TS):
-        self.Rad.initialize(Gr, GMV, TS)
+        self.Rad.initialize(Ref, Gr, GMV, TS)
         return
 
     cpdef initialize_io(self, NetCDFIO_Stats Stats):
@@ -540,7 +540,7 @@ cdef class life_cycle_Tan2018(CasesBase):
         return
 
     cpdef initialize_radiation(self, Grid Gr, ReferenceState Ref, GridMeanVariables GMV, TimeStepping TS):
-        self.Rad.initialize(Gr, GMV, TS)
+        self.Rad.initialize(Ref, Gr, GMV, TS)
         return
 
     cpdef initialize_io(self, NetCDFIO_Stats Stats):
@@ -669,7 +669,7 @@ cdef class Rico(CasesBase):
                 self.Fo.subsidence[k] = -0.005
         return
     cpdef initialize_radiation(self, Grid Gr, ReferenceState Ref, GridMeanVariables GMV, TimeStepping TS):
-        self.Rad.initialize(Gr, GMV, TS)
+        self.Rad.initialize(Ref, Gr, GMV, TS)
         return
 
     cpdef initialize_io(self, NetCDFIO_Stats Stats):
@@ -828,7 +828,7 @@ cdef class TRMM_LBA(CasesBase):
 
 
     cpdef initialize_radiation(self, Grid Gr, ReferenceState Ref, GridMeanVariables GMV, TimeStepping TS):
-        self.Rad.initialize(Gr, GMV, TS)
+        self.Rad.initialize(Ref, Gr, GMV, TS)
         return
 
     cpdef initialize_io(self, NetCDFIO_Stats Stats):
@@ -939,7 +939,7 @@ cdef class ARM_SGP(CasesBase):
 
         return
     cpdef initialize_radiation(self, Grid Gr, ReferenceState Ref, GridMeanVariables GMV, TimeStepping TS):
-        self.Rad.initialize(Gr, GMV, TS)
+        self.Rad.initialize(Ref, Gr, GMV, TS)
         return
 
 
@@ -1109,7 +1109,7 @@ cdef class GATE_III(CasesBase):
 
 
     cpdef initialize_radiation(self, Grid Gr, ReferenceState Ref, GridMeanVariables GMV, TimeStepping TS):
-        self.Rad.initialize(Gr, GMV, TS)
+        self.Rad.initialize(Ref, Gr, GMV, TS)
         return
 
     cpdef initialize_io(self, NetCDFIO_Stats Stats):
@@ -1309,7 +1309,7 @@ cdef class DYCOMS_RF01(CasesBase):
 
     cpdef initialize_radiation(self, Grid Gr, ReferenceState Ref, GridMeanVariables GMV, TimeStepping TS):
         self.Rad.Gr  = Gr
-        self.Rad.initialize(Gr, GMV, TS)
+        self.Rad.initialize(Ref, Gr, GMV, TS)
         self.Rad.calculate_radiation(Ref, Gr, GMV, TS)
         return
     cpdef initialize_io(self, NetCDFIO_Stats Stats):
@@ -1416,7 +1416,7 @@ cdef class GABLS(CasesBase):
             self.Fo.vg[k] = 0.0
         return
     cpdef initialize_radiation(self, Grid Gr, ReferenceState Ref, GridMeanVariables GMV, TimeStepping TS):
-        self.Rad.initialize(Gr, GMV, TS)
+        self.Rad.initialize(Ref, Gr, GMV, TS)
         return
 
     cpdef initialize_io(self, NetCDFIO_Stats Stats):
@@ -1524,7 +1524,7 @@ cdef class SP(CasesBase):
             self.Fo.vg[k] = 0.0
         return
     cpdef initialize_radiation(self, Grid Gr, ReferenceState Ref, GridMeanVariables GMV, TimeStepping TS):
-        self.Rad.initialize(Gr, GMV, TS)
+        self.Rad.initialize(Ref, Gr, GMV, TS)
         return
 
 
@@ -1663,7 +1663,7 @@ cdef class DryBubble(CasesBase):
         self.Fo.initialize(Gr, GMV, TS)
         return
     cpdef initialize_radiation(self, Grid Gr, ReferenceState Ref, GridMeanVariables GMV, TimeStepping TS):
-        self.Rad.initialize(Gr, GMV, TS)
+        self.Rad.initialize(Ref, Gr, GMV, TS)
         return
 
     cpdef initialize_io(self, NetCDFIO_Stats Stats):
@@ -1749,7 +1749,7 @@ cdef class LES_driven_SCM(CasesBase):
 
     cpdef initialize_radiation(self, Grid Gr, ReferenceState Ref, GridMeanVariables GMV, TimeStepping TS):
         self.Rad.Gr = Gr
-        self.Rad.initialize(Gr, GMV, TS)
+        self.Rad.initialize(Ref, Gr, GMV, TS)
         return
 
     cpdef initialize_io(self, NetCDFIO_Stats Stats):
