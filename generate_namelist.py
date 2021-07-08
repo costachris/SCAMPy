@@ -21,9 +21,9 @@ def main():
     namelist_defaults['grid']['dims'] = 1
     namelist_defaults['grid']['gw'] = 2
 
-    # Rad namelist
+    # Radiation namelist
     namelist_defaults['radiation'] = {}
-    namelist_defaults['radiation']['toa_sw']
+    namelist_defaults['radiation']['toa_sw'] = 420.0
     ####
     
     namelist_defaults['thermodynamics'] = {}

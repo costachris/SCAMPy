@@ -7,7 +7,7 @@ import platform
 import subprocess as sp
 import os.path
 import string
-
+import platform 
 # Now get include paths from relevant python modules
 # include_path = [mpi4py.get_include()]
 
@@ -21,7 +21,7 @@ if sys.platform == 'darwin':
     extensions = []
     extra_compile_args = []
     extra_compile_args += ['-O3', '-march=native', '-Wno-unused', '-Wno-#warnings','-fPIC']
-    # extra_objects=['./RRTMG/rrtmg_build/rrtmg_combined.o']
+    extra_objects=['./RRTMG/rrtmg_build/rrtmg_combined.o']
     extra_objects = []
     netcdf_include = '/opt/local/include'
     netcdf_lib = '/opt/local/lib'
@@ -36,7 +36,7 @@ elif 'eu' in platform.node():
     extra_compile_args=[]
     extra_compile_args+=['-std=c99', '-O3', '-march=native', '-Wno-unused',
                          '-Wno-#warnings', '-Wno-maybe-uninitialized', '-Wno-cpp', '-Wno-array-bounds','-fPIC']
-    # extra_objects=['./RRTMG/rrtmg_build/rrtmg_combined.o']
+    extra_objects=['./RRTMG/rrtmg_build/rrtmg_combined.o']
     extra_objects = []
     netcdf_include = '/cluster/apps/netcdf/4.3.1/x86_64/gcc_4.8.2/openmpi_1.6.5/include'
     netcdf_lib = '/cluster/apps/netcdf/4.3.1/x86_64/gcc_4.8.2/openmpi_1.6.5/lib'
@@ -56,9 +56,11 @@ elif 'sampo' in platform.node():
     #                                      TODO -march=native
     extra_compile_args+=['-std=c99', '-O3', '-Wno-unused',
                          '-Wno-#warnings', '-Wno-maybe-uninitialized', '-Wno-cpp', '-Wno-array-bounds','-fPIC']
+    extra_objects=['./RRTMG/rrtmg_build/rrtmg_combined.o']
     netcdf_include = '/export/data1/ajaruga/clones/netcdf-4.4/localnetcdf/include'
     netcdf_lib = '/export/data1/ajaruga/clones/netcdf-4.4/localnetcdf/lib'
     f_compiler = 'gfortran'
+    
 elif 'linux' in sys.platform:
     #Compile flags for Travis (linux)
     library_dirs = []
@@ -69,6 +71,7 @@ elif 'linux' in sys.platform:
     extra_compile_args  = []
     extra_compile_args += ['-std=c99', '-O3', '-march=native', '-Wno-unused',
                            '-Wno-#warnings', '-Wno-maybe-uninitialized', '-Wno-cpp', '-Wno-array-bounds','-fPIC']
+    extra_objects=['./RRTMG/rrtmg_build/rrtmg_combined.o']
     from distutils.sysconfig import get_python_lib
     tmp_path = get_python_lib()
     netcdf_include = tmp_path + '/netcdf4/include'
@@ -92,6 +95,10 @@ else:
     print('Unknown system platform: ' + sys.platform  + 'or unknown system name: ' + platform.node())
     sys.exit()
 
+    
+
+    
+    
 
 _ext = Extension('thermodynamic_functions', ['thermodynamic_functions.pyx'], include_dirs=include_path,
                  extra_compile_args=extra_compile_args, libraries=libraries, library_dirs=library_dirs,
@@ -200,7 +207,7 @@ extensions.append(_ext)
 
 _ext = Extension('Radiation', ['Radiation.pyx'], include_dirs=include_path,
                  extra_compile_args=extra_compile_args, libraries=libraries, library_dirs=library_dirs,
-                 runtime_library_dirs=library_dirs)
+                 runtime_library_dirs=library_dirs, extra_objects=extra_objects)
 extensions.append(_ext)
 
 _ext = Extension('pytest_wrapper', ['pytest_wrapper.pyx'], include_dirs=include_path,
