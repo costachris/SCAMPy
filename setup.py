@@ -22,7 +22,6 @@ if sys.platform == 'darwin':
     extra_compile_args = []
     extra_compile_args += ['-O3', '-march=native', '-Wno-unused', '-Wno-#warnings','-fPIC']
     extra_objects=['./RRTMG/rrtmg_build/rrtmg_combined.o']
-    extra_objects = []
     netcdf_include = '/opt/local/include'
     netcdf_lib = '/opt/local/lib'
     f_compiler = 'gfortran'
@@ -37,7 +36,6 @@ elif 'eu' in platform.node():
     extra_compile_args+=['-std=c99', '-O3', '-march=native', '-Wno-unused',
                          '-Wno-#warnings', '-Wno-maybe-uninitialized', '-Wno-cpp', '-Wno-array-bounds','-fPIC']
     extra_objects=['./RRTMG/rrtmg_build/rrtmg_combined.o']
-    extra_objects = []
     netcdf_include = '/cluster/apps/netcdf/4.3.1/x86_64/gcc_4.8.2/openmpi_1.6.5/include'
     netcdf_lib = '/cluster/apps/netcdf/4.3.1/x86_64/gcc_4.8.2/openmpi_1.6.5/lib'
     f_compiler = 'gfortran'
@@ -102,107 +100,107 @@ else:
 
 _ext = Extension('thermodynamic_functions', ['thermodynamic_functions.pyx'], include_dirs=include_path,
                  extra_compile_args=extra_compile_args, libraries=libraries, library_dirs=library_dirs,
-                 runtime_library_dirs=library_dirs)
+                 runtime_library_dirs=library_dirs, extra_objects=extra_objects)
 extensions.append(_ext)
 
 _ext = Extension('microphysics_functions', ['microphysics_functions.pyx'], include_dirs=include_path,
                  extra_compile_args=extra_compile_args, libraries=libraries, library_dirs=library_dirs,
-                 runtime_library_dirs=library_dirs)
+                 runtime_library_dirs=library_dirs, extra_objects=extra_objects)
 extensions.append(_ext)
 
 _ext = Extension('turbulence_functions', ['turbulence_functions.pyx'], include_dirs=include_path,
                  extra_compile_args=extra_compile_args, libraries=libraries, library_dirs=library_dirs,
-                 runtime_library_dirs=library_dirs)
+                 runtime_library_dirs=library_dirs, extra_objects=extra_objects)
 extensions.append(_ext)
 
 _ext = Extension('utility_functions', ['utility_functions.pyx'], include_dirs=include_path,
                  extra_compile_args=extra_compile_args, libraries=libraries, library_dirs=library_dirs,
-                 runtime_library_dirs=library_dirs)
+                 runtime_library_dirs=library_dirs, extra_objects=extra_objects)
 extensions.append(_ext)
 
 
 _ext = Extension('Grid', ['Grid.pyx'], include_dirs=include_path,
                  extra_compile_args=extra_compile_args, libraries=libraries, library_dirs=library_dirs,
-                 runtime_library_dirs=library_dirs)
+                 runtime_library_dirs=library_dirs, extra_objects=extra_objects)
 extensions.append(_ext)
 
 
 _ext = Extension('Simulation1d', ['Simulation1d.pyx'], include_dirs=include_path,
                  extra_compile_args=extra_compile_args, libraries=libraries, library_dirs=library_dirs,
-                 runtime_library_dirs=library_dirs)
+                 runtime_library_dirs=library_dirs, extra_objects=extra_objects)
 extensions.append(_ext)
 
 
 _ext = Extension('Variables', ['Variables.pyx'], include_dirs=include_path,
                  extra_compile_args=extra_compile_args, libraries=libraries, library_dirs=library_dirs,
-                 runtime_library_dirs=library_dirs)
+                 runtime_library_dirs=library_dirs, extra_objects=extra_objects)
 extensions.append(_ext)
 
 _ext = Extension('TimeStepping', ['TimeStepping.pyx'], include_dirs=include_path,
                  extra_compile_args=extra_compile_args, libraries=libraries, library_dirs=library_dirs,
-                 runtime_library_dirs=library_dirs)
+                 runtime_library_dirs=library_dirs, extra_objects=extra_objects)
 extensions.append(_ext)
 
 _ext = Extension('NetCDFIO', ['NetCDFIO.pyx'], include_dirs=include_path,
                  extra_compile_args=extra_compile_args, libraries=libraries, library_dirs=library_dirs,
-                 runtime_library_dirs=library_dirs)
+                 runtime_library_dirs=library_dirs, extra_objects=extra_objects)
 extensions.append(_ext)
 
 _ext = Extension('EDMF_Updrafts', ['EDMF_Updrafts.pyx'], include_dirs=include_path,
                  extra_compile_args=extra_compile_args, libraries=libraries, library_dirs=library_dirs,
-                 runtime_library_dirs=library_dirs)
+                 runtime_library_dirs=library_dirs, extra_objects=extra_objects)
 extensions.append(_ext)
 
 _ext = Extension('EDMF_Environment', ['EDMF_Environment.pyx'], include_dirs=include_path,
                  extra_compile_args=extra_compile_args, libraries=libraries, library_dirs=library_dirs,
-                 runtime_library_dirs=library_dirs)
+                 runtime_library_dirs=library_dirs, extra_objects=extra_objects)
 extensions.append(_ext)
 
 _ext = Extension('EDMF_Rain', ['EDMF_Rain.pyx'], include_dirs=include_path,
                  extra_compile_args=extra_compile_args, libraries=libraries, library_dirs=library_dirs,
-                 runtime_library_dirs=library_dirs)
+                 runtime_library_dirs=library_dirs, extra_objects=extra_objects)
 extensions.append(_ext)
 
 _ext = Extension('Turbulence', ['Turbulence.pyx'], include_dirs=include_path,
                  extra_compile_args=extra_compile_args, libraries=libraries, library_dirs=library_dirs,
-                 runtime_library_dirs=library_dirs)
+                 runtime_library_dirs=library_dirs, extra_objects=extra_objects)
 extensions.append(_ext)
 
 _ext = Extension('Turbulence_PrognosticTKE', ['Turbulence_PrognosticTKE.pyx'], include_dirs=include_path,
                  extra_compile_args=extra_compile_args, libraries=libraries, library_dirs=library_dirs,
-                 runtime_library_dirs=library_dirs)
+                 runtime_library_dirs=library_dirs, extra_objects=extra_objects)
 extensions.append(_ext)
 
 _ext = Extension('ReferenceState', ['ReferenceState.pyx'], include_dirs=include_path,
                  extra_compile_args=extra_compile_args, libraries=libraries, library_dirs=library_dirs,
-                 runtime_library_dirs=library_dirs)
+                 runtime_library_dirs=library_dirs, extra_objects=extra_objects)
 extensions.append(_ext)
 
 
 _ext = Extension('Forcing', ['Forcing.pyx'], include_dirs=include_path,
                  extra_compile_args=extra_compile_args, libraries=libraries, library_dirs=library_dirs,
-                 runtime_library_dirs=library_dirs)
+                 runtime_library_dirs=library_dirs, extra_objects=extra_objects)
 extensions.append(_ext)
 
 _ext = Extension('forcing_functions', ['forcing_functions.pyx'], include_dirs=include_path,
                  extra_compile_args=extra_compile_args, libraries=libraries, library_dirs=library_dirs,
-                 runtime_library_dirs=library_dirs)
+                 runtime_library_dirs=library_dirs, extra_objects=extra_objects)
 extensions.append(_ext)
 
 _ext = Extension('Surface', ['Surface.pyx'], include_dirs=include_path,
                  extra_compile_args=extra_compile_args, libraries=libraries, library_dirs=library_dirs,
-                 runtime_library_dirs=library_dirs)
+                 runtime_library_dirs=library_dirs, extra_objects=extra_objects)
 extensions.append(_ext)
 
 
 _ext = Extension('surface_functions', ['surface_functions.pyx'], include_dirs=include_path,
                  extra_compile_args=extra_compile_args, libraries=libraries, library_dirs=library_dirs,
-                 runtime_library_dirs=library_dirs)
+                 runtime_library_dirs=library_dirs, extra_objects=extra_objects)
 extensions.append(_ext)
 
 _ext = Extension('Cases', ['Cases.pyx'], include_dirs=include_path,
                  extra_compile_args=extra_compile_args, libraries=libraries, library_dirs=library_dirs,
-                 runtime_library_dirs=library_dirs)
+                 runtime_library_dirs=library_dirs, extra_objects=extra_objects)
 extensions.append(_ext)
 
 _ext = Extension('Radiation', ['Radiation.pyx'], include_dirs=include_path,
@@ -212,7 +210,7 @@ extensions.append(_ext)
 
 _ext = Extension('pytest_wrapper', ['pytest_wrapper.pyx'], include_dirs=include_path,
                  extra_compile_args=extra_compile_args, libraries=libraries, library_dirs=library_dirs,
-                 runtime_library_dirs=library_dirs)
+                 runtime_library_dirs=library_dirs, extra_objects=extra_objects)
 extensions.append(_ext)
 
 #Build RRTMG
